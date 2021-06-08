@@ -8,7 +8,6 @@ output:
     toc_float: true
 ---
 
-
 ```{r setup, include=FALSE}
 
 knitr::opts_chunk$set(
@@ -22,9 +21,6 @@ knitr::opts_chunk$set(warning = FALSE) # Remove todos os warnings # dos outputs 
 knitr::opts_chunk$set(message = FALSE) # Remove todas as mensagens # dos outputs do R
 
 ```
-
-
-
 
 <style>
 p.comment {
@@ -77,3 +73,14 @@ Esta publicação faz uso dos dados disponíveis na Síntese de Informações So
 
 
 IBGE, **Síntese de Indicadores Sociais - SIS** disponível em: [ibge.gov.br](https://www.ibge.gov.br/estatisticas/sociais/saude/9221-sintese-de-indicadores-sociais.html?=&t=resultados), acesso em jun/2021.
+
+
+https://app.powerbi.com/groups/me/reports/cf3dce31-9586-4ee3-884f-626b33a4c14e?ctid=3e6daa2c-9ac5-48ea-b00e-a61abbffacdb
+
+
+
+
+
+***
+
+<iframe width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNjYyNjI2OTQtOWI0ZC00OTZkLTgyYzAtNDM5ZmE4ZmFlMjEyIiwidCI6IjNlNmRhYTJjLTlhYzUtNDhlYS1iMDBlLWE2MWFiYmZmYWNkYiJ9" frameborder="0" allowFullScreen="true"></iframe>

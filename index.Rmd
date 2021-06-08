@@ -27,6 +27,11 @@ Esta é uma página que objetiva organizar as visualizações de dados e estatí
 &nbsp;
 
 
+
+
+<iframe width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNjYyNjI2OTQtOWI0ZC00OTZkLTgyYzAtNDM5ZmE4ZmFlMjEyIiwidCI6IjNlNmRhYTJjLTlhYzUtNDhlYS1iMDBlLWE2MWFiYmZmYWNkYiJ9" frameborder="0" allowFullScreen="true"></iframe>
+
+
 ***
 
 <small>
