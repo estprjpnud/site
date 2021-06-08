@@ -1,0 +1,79 @@
+---
+title: "Estatísticas: Grau de Instrução x Participação na renda familiar"
+author: "Rodrigo H. Ozon, Karina O. Hernandes Campos "
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE,
+	comment = NA
+)
+knitr::opts_chunk$set(comment = NA) # Remove todos os coments # dos outputs do R
+knitr::opts_chunk$set(warning = FALSE) # Remove todos os warnings # dos outputs do R
+knitr::opts_chunk$set(message = FALSE) # Remove todas as mensagens # dos outputs do R
+
+```
+
+
+
+
+<style>
+p.comment {
+background-color: #DBDBDB;
+padding: 10px;
+border: 1px solid black;
+margin-left: 25px;
+border-radius: 5px;
+font-style: italic;
+}
+
+</style>
+
+
+***
+
+
+
+<p>
+<p style="font-family: times, serif; font-size:11pt; font-style:italic"; class="comment">
+
+Esta publicação faz uso dos dados disponíveis na Síntese de Informações Sociais do IBGE.
+
+</p>
+
+&nbsp;
+
+***
+
+# Contexto
+
++ Os dados da pesquisa da Síntese de Indicadores Sociais do IBGE demonstram dados referentes à frequência escolar, evasão, continuidade na formação educacional e demais cruzamentos como participação nos níveis de renda na família, p .ex.
+
++ A lista de tabelas com os cruzamentos e demais dados disponíveis na Síntese [pode ser consultada aqui.](https://ftp.ibge.gov.br/Indicadores_Sociais/Sintese_de_Indicadores_Sociais/Sintese_de_Indicadores_Sociais_2020/indice_das_tabelas_sis2020.pdf)
+
++ A [tabela 3.11 disponibilizada no IBGE, na temática "Educação"](https://www.ibge.gov.br/estatisticas/sociais/saude/9221-sintese-de-indicadores-sociais.html?=&t=resultados) e também tratada e hospedada em nosso repositório de gerou a visualização interativa a seguir:
+
+
+<iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=3066480c-0075-467f-82f2-7fa5ede4e828&autoAuth=true&ctid=2f1fc142-820a-47cd-ad12-af4697353397&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1iLXByaW1hcnktcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D" frameborder="0" allowFullScreen="true"></iframe>
+
+***
+
+
+&nbsp;
+
+
+***
+
+# Referências
+
+
+IBGE, **Síntese de Indicadores Sociais - SIS** disponível em: [ibge.gov.br](https://www.ibge.gov.br/estatisticas/sociais/saude/9221-sintese-de-indicadores-sociais.html?=&t=resultados), acesso em jun/2021.

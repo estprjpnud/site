@@ -1,0 +1,46 @@
+---
+title: "_Sobre_"
+---
+
+***
+
+<style>
+p.comment {
+background-color: #DBDBDB;
+padding: 10px;
+border: 1px solid black;
+margin-left: 25px;
+border-radius: 5px;
+font-style: italic;
+}
+
+</style>
+
+
+<p>
+<p style="font-family: times, serif; font-size:11pt; font-style:italic"; class="comment">
+
+Esta é uma página que objetiva organizar as visualizações de dados e estatísticas geradas pela equipe de pesquisadores envolvidos no projeto PNUD BRA/18/024 "Fortalecimento da garantia do direito à vida e da redução da violência contra crianças e adolescentes no Brasil".
+
+</p>
+
+&nbsp;
+
+
+***
+
+<small>
+
+Os pesquisadores responsáveis por mantê-la e pelas visualizações aqui criadas são:
+
++ [Rodrigo Hermont Ozon](https://www.linkedin.com/in/rodrigohermontozon/) (Economista e Msc. Desenvolvimento Econômico)
+
++ [Karina de Oliveira Hernandes Campos](https://www.linkedin.com/in/karina-de-oliveira-hernandes-campos-4b10b6133/) (Estatística, MBA em Ciência de Dados)
+
+***
+
+[Atuação Global](http://www.atuacaoglobal.com.br/)
+
+[PNUD/ONU (Chamada Pública)](https://www.gov.br/mdh/pt-br/navegue-por-temas/atuacao-internacional/Edital052020reasade_Republicao_PrevencaoGravidezPrecoce_PNUD18024.pdf)
+
+</small>

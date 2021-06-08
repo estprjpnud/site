@@ -1,0 +1,32 @@
+name: "Projeto PNUD BRA/18/024."
+output_dir: "."
+navbar:
+  title: "Publicações"
+  type: default
+  left:
+    - text: "Home"
+      icon: fa-home
+      href: https://github.com/estprjpnud
+    - text: "Conheça a Atuação Global"
+      icon: fa-info
+      href: https://www.youtube.com/c/atuacaoglobal
+    - text: "Selecione"
+      icon: fa-gear
+      menu:
+        - text: "PUBLICAÇÕES"
+        - text: "---------"
+        - text: "Sobre"
+          href: index.html
+        - text: "---------"
+        - text: "Estatísticas da Síntese de Informações Sociais/IBGE"
+          href: instrxrendafam.html
+
+  right:
+    - icon: fa-question fa-lg
+      href: http://www.atuacaoglobal.com.br/
+    - icon: fa-github
+      href: https://github.com/estprjpnud
+    - icon: fa-linkedin
+      href: https://www.linkedin.com/company/atuacao-voluntaria---associacao-de-voluntariado/about/
+    - icon: fa-whatsapp
+      href: https://api.whatsapp.com/send?phone=5541984956333&text=
