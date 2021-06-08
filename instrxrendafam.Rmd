@@ -58,8 +58,15 @@ Esta publicação faz uso dos dados disponíveis na Síntese de Informações So
 
 + A [tabela 3.11 disponibilizada no IBGE, na temática "Educação"](https://www.ibge.gov.br/estatisticas/sociais/saude/9221-sintese-de-indicadores-sociais.html?=&t=resultados) e também tratada e hospedada em nosso repositório de gerou a visualização interativa a seguir:
 
+&nbsp;
 
-<iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=3066480c-0075-467f-82f2-7fa5ede4e828&autoAuth=true&ctid=2f1fc142-820a-47cd-ad12-af4697353397&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWJyYXppbC1zb3V0aC1iLXByaW1hcnktcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D" frameborder="0" allowFullScreen="true"></iframe>
+***
+
+<a href="https://app.powerbi.com/view?r=eyJrIjoiNjYyNjI2OTQtOWI0ZC00OTZkLTgyYzAtNDM5ZmE4ZmFlMjEyIiwidCI6IjNlNmRhYTJjLTlhYzUtNDhlYS1iMDBlLWE2MWFiYmZmYWNkYiJ9&pageName=ReportSection">Visualização da tabela 3.11</a>
+
+<iframe width="550" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNjYyNjI2OTQtOWI0ZC00OTZkLTgyYzAtNDM5ZmE4ZmFlMjEyIiwidCI6IjNlNmRhYTJjLTlhYzUtNDhlYS1iMDBlLWE2MWFiYmZmYWNkYiJ9&pageName=ReportSection" frameborder="0" allowFullScreen="true"></iframe>
+
+
 
 ***
 
@@ -74,13 +81,4 @@ Esta publicação faz uso dos dados disponíveis na Síntese de Informações So
 
 IBGE, **Síntese de Indicadores Sociais - SIS** disponível em: [ibge.gov.br](https://www.ibge.gov.br/estatisticas/sociais/saude/9221-sintese-de-indicadores-sociais.html?=&t=resultados), acesso em jun/2021.
 
-
-https://app.powerbi.com/groups/me/reports/cf3dce31-9586-4ee3-884f-626b33a4c14e?ctid=3e6daa2c-9ac5-48ea-b00e-a61abbffacdb
-
-
-
-
-
 ***
-
-<iframe width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNjYyNjI2OTQtOWI0ZC00OTZkLTgyYzAtNDM5ZmE4ZmFlMjEyIiwidCI6IjNlNmRhYTJjLTlhYzUtNDhlYS1iMDBlLWE2MWFiYmZmYWNkYiJ9" frameborder="0" allowFullScreen="true"></iframe>
