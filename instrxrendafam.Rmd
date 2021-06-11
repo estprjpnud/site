@@ -62,11 +62,11 @@ Esta publicação faz uso dos dados disponíveis na Síntese de Informações So
 
 ***
 
-<a href="https://app.powerbi.com/view?r=eyJrIjoiNjYyNjI2OTQtOWI0ZC00OTZkLTgyYzAtNDM5ZmE4ZmFlMjEyIiwidCI6IjNlNmRhYTJjLTlhYzUtNDhlYS1iMDBlLWE2MWFiYmZmYWNkYiJ9&pageName=ReportSection618e681eb23e06438079">Visualização da tabela 3.11</a>
+<a href="https://app.powerbi.com/view?r=eyJrIjoiNDQ5OGMxMzItOTJiNi00OTJlLThiN2MtYmU1ZWIwZTI3NDVjIiwidCI6IjNlNmRhYTJjLTlhYzUtNDhlYS1iMDBlLWE2MWFiYmZmYWNkYiJ9">Visualização da tabela 3.11</a>
 
 <center>
 
-<iframe width="550" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNjYyNjI2OTQtOWI0ZC00OTZkLTgyYzAtNDM5ZmE4ZmFlMjEyIiwidCI6IjNlNmRhYTJjLTlhYzUtNDhlYS1iMDBlLWE2MWFiYmZmYWNkYiJ9&pageName=ReportSection618e681eb23e06438079" frameborder="0" allowFullScreen="true"></iframe>
+<iframe width="550" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNDQ5OGMxMzItOTJiNi00OTJlLThiN2MtYmU1ZWIwZTI3NDVjIiwidCI6IjNlNmRhYTJjLTlhYzUtNDhlYS1iMDBlLWE2MWFiYmZmYWNkYiJ9" frameborder="0" allowFullScreen="true"></iframe>
 
 </center>
 
