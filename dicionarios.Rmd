@@ -1,0 +1,354 @@
+---
+title: "Linha de Base: Dicionário de Dados"
+author: "Rodrigo Hermont Ozon"
+date: "Last Update: `r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  html_document:
+    df_print: paged
+    code_folding: hide
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+---
+
+```{r}
+
+start_time <- Sys.time()
+
+```
+
+
+```{css toc-content, echo = FALSE}
+
+#TOC {
+  left: 220px;
+  margin: 50px 30px 55px 30px;
+}
+
+.main-container {
+    margin-left: 300px;
+}
+
+
+```
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE,
+	comment = NA
+)
+knitr::opts_chunk$set(comment = NA)    # Remove all coments # of R outputs
+knitr::opts_chunk$set(warning = FALSE) # Remove all warnings # of R outputs
+knitr::opts_chunk$set(message = FALSE) # Remove all messages # of R outputs
+
+```
+
+***
+
+<style>
+p.comment {
+background-color: #DBDBDB;
+padding: 10px;
+border: 1px solid black;
+margin-left: 25px;
+border-radius: 5px;
+font-style: italic;
+}
+
+</style>
+
+<div class="alert alert-info">
+
+  <strong> Plano de Coleta de Dados e Dicionário: Projeto Vem Viver -- Juntos pela Proteção da Vida </strong> 
+  
+</div>
+
+***
+
+<center>
+![](https://github.com/estprjpnud/datasets/raw/main/logos.png){width=40%}
+</center>
+
+
+***
+
+<center>
+
+<p >
+<p style="font-family: times, serif; font-size:11pt; font-style:italic"; class="comment">
+
+Este documento tem por objetivo sistematizar os dados a serem coletados em cada região a ser atendida pelas ações do projeto Vem Viver -- Juntos pela Proteção da Vida.
+
+Neste sentido formalizamos a sistemática que atende a demanda de criação de um "Relatório com definição das linhas de base nos municípios de intervenção e métodos e parâmetros de monitoramento, modelos de registro e definição de indicadores de progresso.", conforme disposto em edital.
+
+</p>
+
+</center>
+
+***
+
+
+
+<!-- Next Section-------------------------------------------------------------------------------------------------------------- --> 
+<!-- comment ----------------------------------------------------------------------------------------------------------------- --> 
+<!-- Next Section-------------------------------------------------------------------------------------------------------------- --> 
+
+# Plano de Coleta de Dados/Dicionário
+
+## Introdução {.tabset .tabset-fade }
+
+Este documento interativo tem o objetivo de atender a necessidade de sistematizar o plano de coleta de dados em cada uma das regiões de mapeamento a serem atendidas pelo Projeto.
+
+Cada aba a seguir representa uma fonte originadora das informações que foram extraídas e sistematizadas, possibilitando aos usuários, demandante e atendidos pelo projeto futuramente no monitoramento do status de cada disponibilidade de cada dado e o referido responsável ou ponto de contato responsável pelo fornecimento de tais estatísticas quando cabível.
+
+
+### Plano Metodológico 
+
+***
+
+Orientado pelo Plano de Ação disposto no Plano Metodológico (p. 13) elaboramos o seguinte plano de coleta e dicionário de dados:
+
+```{r}
+
+library(readxl)
+library(tidyverse)
+library(dplyr)
+library(DT)
+
+```
+
+
+```{r}
+
+url <- "https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados.xlsx"
+
+path <- tempfile()
+
+download.file(url, path, mode="wb")
+
+dicionario_plano_met_plano_de_acao <- read_excel(path = path, skip = 1, sheet = 2)
+
+datatable(dicionario_plano_met_plano_de_acao, caption = 'Plano de Coleta e Dicionário de Dados disposto no Manual Metodológico', filter = 'top', options = list(pageLength = 5, autoWidth = TRUE))
+
+```
+
+
+***
+
+### Relatório de Mapeamento Região Centro-Oeste 
+
+
+
+```{r}
+
+url <- "https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados%20Centro%20Oeste.xlsx"
+
+dicionario_centro_oeste <- tempfile()
+
+download.file(url, dicionario_centro_oeste, mode="wb")
+
+dicionario_centro_oeste <- read_excel(path = dicionario_centro_oeste, skip = 1, sheet = 2)
+
+datatable(dicionario_centro_oeste, caption = 'Plano de Coleta e Dicionário de Dados disposto no relatório da região Centro Oeste', filter = 'top', options = list(pageLength = 5, autoWidth = TRUE))
+
+```
+
+
+Conforme os pesquisadores apontaram no documento pág. 18:
+
+<p >
+<p style="font-family: times, serif; font-size:11pt; font-style:italic"; class="quote">
+
+Como apontado pelos atores envolvidos no Seminário, a Administração Pública do DF não dispõe de meios informatizados para aferição de alguns dados propostos pelo Eixo 1, como metas e meios de monitoramento, conforme elencados no quadro acima. Destaca-se que no âmbito do Distrito Federal existem dados sigilosos que não são passíveis de publicação e acesso externo por terceiros, sendo possível apenas o monitoramento de dados públicos.
+
+
+</p>
+
+
+
+***
+
+### Relatório de Mapeamento Região Sul (Paraná)
+
+
+
+```{r}
+
+url <- "https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados%20Sul.xlsx"
+
+path <- tempfile()
+
+download.file(url, path, mode = "wb")
+
+dicionario_sul <- read_excel(path = path, skip = 1, sheet = 2)
+
+datatable(dicionario_sul, caption = 'Plano de Coleta e Dicionário de Dados disposto no relatório da região Sul (PR)', filter = 'top', options = list(pageLength = 5, autoWidth = TRUE))
+
+```
+
+
+
+***
+
+### Relatório de Mapeamento Região Sul (RS)
+
+
+
+```{r}
+
+url <- "https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados%20Sul%20(RS).xlsx"
+
+path <- tempfile()
+
+download.file(url, path, mode = "wb")
+
+dicionario_sul_rs <- read_excel(path = path, skip = 1, sheet = 2)
+
+datatable(dicionario_sul_rs, caption = 'Plano de Coleta e Dicionário de Dados disposto no relatório da região Sul (RS)', filter = 'top', options = list(pageLength = 5, autoWidth = TRUE))
+
+```
+
+
+
+
+
+***
+
+
+
+
+
+### Relatório de Mapeamento Região Nordeste
+
+
+```{r}
+
+url <- "https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados%20Nordeste.xlsx"
+
+path <- tempfile()
+
+download.file(url, path, mode = "wb")
+
+dicionario_nordeste <- read_excel(path = path, skip = 1, sheet = 2)
+
+datatable(dicionario_nordeste, caption = 'Plano de Coleta e Dicionário de Dados disposto no relatório da região Nordeste', filter = 'top', options = list(pageLength = 5, autoWidth = TRUE))
+
+```
+
+
+
+
+***
+
+
+### Relatório de Mapeamento Região Sudeste
+
+
+
+```{r}
+
+url <- "https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados%20Sudeste.xlsx"
+
+path <- tempfile()
+
+download.file(url, path, mode = "wb")
+
+dicionario_sudeste <- read_excel(path = path, skip = 1, sheet = 2)
+
+datatable(dicionario_sudeste, caption = 'Plano de Coleta e Dicionário de Dados disposto no relatório da região Sudeste', filter = 'top', options = list(pageLength = 5, autoWidth = TRUE))
+
+```
+
+
+
+
+***
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+***
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+***
+
+# Referências
+
+
+Atuação Global, **Manual Metodológico**, acesso em nov. 2021 
+
+______________, **Relatório de Mapeamento Região Sul (Paraná): "Fortalecimento da garantia do direito à vida e da redução da violência contra crianças e adolescentes no Brasil"**, acesso em nov. 2021
+
+______________, **Relatório de Mapeamento Região Sul (Rio Grande do Sul): "Fortalecimento da garantia do direito à vida e da redução da violência contra crianças e adolescentes no Brasil"**, acesso em nov. 2021
+
+______________, **Relatório de Mapeamento Região Centro-Oeste: "Fortalecimento da garantia do direito à vida e da redução da violência contra crianças e adolescentes no Brasil"**, acesso em nov. 2021
+
+______________, **Relatório de Mapeamento Região Nordeste: "Fortalecimento da garantia do direito à vida e da redução da violência contra crianças e adolescentes no Brasil"**, acesso em nov. 2021
+
+______________, **Relatório de Mapeamento Região Sudeste: "Fortalecimento da garantia do direito à vida e da redução da violência contra crianças e adolescentes no Brasil"**, acesso em nov. 2021
+
+***
+
+&nbsp;
+
+
+
+
+

@@ -20,6 +20,9 @@ navbar:
         - text: "---------"
         - text: "Estatísticas da Síntese de Informações Sociais/IBGE"
           href: instrxrendafam.html
+        - text: "Dicionário de dados/plano de coleta por regiões"
+          href: dicionarios.html          
+          
 
   right:
     - icon: fa-question fa-lg

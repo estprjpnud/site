@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Rodrigo Hermont Ozon" />
+
+
+<title>Linha de Base: Dicionário de Dados</title>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.19/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="site_libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="site_libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Publicações</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="https://github.com/estprjpnud">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="https://www.youtube.com/c/atuacaoglobal">
+    <span class="fa fa-info"></span>
+     
+    Conheça a Atuação Global
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    Selecione
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">PUBLICAÇÕES</li>
+    <li class="divider"></li>
+    <li>
+      <a href="index.html">Sobre</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="instrxrendafam.html">Estatísticas da Síntese de Informações Sociais/IBGE</a>
+    </li>
+    <li>
+      <a href="dicionarios.html">Dicionário de dados/plano de coleta por regiões</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="http://www.atuacaoglobal.com.br/">
+    <span class="fa fa-question fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/estprjpnud">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/company/atuacao-voluntaria---associacao-de-voluntariado/about/">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://api.whatsapp.com/send?phone=5541984956333&amp;text=">
+    <span class="fa fa-whatsapp"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Linha de Base: Dicionário de Dados</h1>
+<h4 class="author">Rodrigo Hermont Ozon</h4>
+<h4 class="date">Last Update: novembro 12, 2021</h4>
+
+</div>
+
+
+<pre class="r"><code>start_time &lt;- Sys.time()</code></pre>
+<style type="text/css">
+
+#TOC {
+  left: 220px;
+  margin: 50px 30px 55px 30px;
+}
+
+.main-container {
+    margin-left: 300px;
+}
+
+
+</style>
+<hr />
+<style>
+p.comment {
+background-color: #DBDBDB;
+padding: 10px;
+border: 1px solid black;
+margin-left: 25px;
+border-radius: 5px;
+font-style: italic;
+}
+
+</style>
+<div class="alert alert-info">
+<p><strong> Plano de Coleta de Dados e Dicionário: Projeto Vem Viver – Juntos pela Proteção da Vida </strong></p>
+</div>
+<hr />
+<center>
+<img src="https://github.com/estprjpnud/datasets/raw/main/logos.png" style="width:40.0%" />
+</center>
+<hr />
+<center>
+<p >
+<p style="font-family: times, serif; font-size:11pt; font-style:italic"; class="comment">
+
+Este documento tem por objetivo sistematizar os dados a serem coletados em cada região a ser atendida pelas ações do projeto Vem Viver -- Juntos pela Proteção da Vida.
+
+Neste sentido formalizamos a sistemática que atende a demanda de criação de um "Relatório com definição das linhas de base nos municípios de intervenção e métodos e parâmetros de monitoramento, modelos de registro e definição de indicadores de progresso.", conforme disposto em edital.
+
+</p>
+</center>
+<hr />
+<!-- Next Section-------------------------------------------------------------------------------------------------------------- -->
+<!-- comment ----------------------------------------------------------------------------------------------------------------- -->
+<!-- Next Section-------------------------------------------------------------------------------------------------------------- -->
+<div id="plano-de-coleta-de-dadosdicionário" class="section level1">
+<h1>Plano de Coleta de Dados/Dicionário</h1>
+<div id="introdução" class="section level2 tabset tabset-fade">
+<h2>Introdução</h2>
+<p>Este documento interativo tem o objetivo de atender a necessidade de sistematizar o plano de coleta de dados em cada uma das regiões de mapeamento a serem atendidas pelo Projeto.</p>
+<p>Cada aba a seguir representa uma fonte originadora das informações que foram extraídas e sistematizadas, possibilitando aos usuários, demandante e atendidos pelo projeto futuramente no monitoramento do status de cada disponibilidade de cada dado e o referido responsável ou ponto de contato responsável pelo fornecimento de tais estatísticas quando cabível.</p>
+<div id="plano-metodológico" class="section level3">
+<h3>Plano Metodológico</h3>
+<hr />
+<p>Orientado pelo Plano de Ação disposto no Plano Metodológico (p. 13) elaboramos o seguinte plano de coleta e dicionário de dados:</p>
+<pre class="r"><code>library(readxl)
+library(tidyverse)
+library(dplyr)
+library(DT)</code></pre>
+<pre class="r"><code>url &lt;- &quot;https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados.xlsx&quot;
+
+path &lt;- tempfile()
+
+download.file(url, path, mode=&quot;wb&quot;)
+
+dicionario_plano_met_plano_de_acao &lt;- read_excel(path = path, skip = 1, sheet = 2)
+
+datatable(dicionario_plano_met_plano_de_acao, caption = &#39;Plano de Coleta e Dicionário de Dados disposto no Manual Metodológico&#39;, filter = &#39;top&#39;, options = list(pageLength = 5, autoWidth = TRUE))</code></pre>
+<div id="htmlwidget-e95f53360a03203a3f6d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e95f53360a03203a3f6d">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Plano de Coleta e Dicionário de Dados disposto no Manual Metodológico<\/caption>","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40"],["Número de homicídios de 15 a 29 anos",null,"Número de casos de violência registrados",null,"Número de boletins de ocorrência policial crianças e adolesc.",null,"Número de ocorrências de violência intraescolar",null,"Quant. Rondas Policiais entorno das escolas",null,"Número de instituições públicas integrantes da rede de proteção",null,"Lista de frequência de participação nas formações.",null,"Número de participantes nas formações integradas",null,"Evasão escolar (nro. Matrículas x índices de evasão)",null,"Número de frequência escolar",null,"Número de reingressos nas escolas",null,"Número de buscas ativas realizadas",null,"Número de famílias inscritas no Programa",null,"Número de participantes da família nas formações integradas.",null,"Número de famílias que receberam benefícios sociais.",null,"Número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar",null,"Número de crianças e adolescentes inscritos em programas socioassistenciais.",null,"Número de jovens incluídos no mercado de trabalho (jovem aprendiz).",null,"Número de reuniões realizadas com a família x escola x comunidade.",null,"Nível de satisfação dos participantes com relação ao programa.","Fonte: Manual Metodológico"],["Promover",null,"Reduzir",null,"Reduzir",null,"Reduzir",null,"Ampliar",null,"Integrar",null,"Integrar",null,"Integrar",null,"Prevenir",null,"Prevenir",null,"Prevenir",null,"Prevenir",null,"Fortalecer",null,"Fortalecer",null,"Fortalecer",null,"Fortalecer",null,"Fortalecer",null,"Fortalecer",null,"Fortalecer",null,"Fortalecer",null],["Diminuição do número de mortes violentas infantojuvenil no território.",null,"Redução do número de casos de negligência/violência com crianças e adolescentes registrados nos locais da rede de proteção.",null,"Redução do número de boletins de ocorrência com crianças e adolescentes.",null,"Redução do número de ocorrências de violência intraescolar registradas.",null,"Ampliação do número de rondas policiais no entorno da escola.",null,"Ampliação do número de instituições públicas integrantes da rede de proteção do Programa",null,"Ampliação do número de instituições públicas integrantes da rede de proteção do Programa",null,"Ampliação do número de integrantes da sociedade civil participando em atividades de monitoramento e avaliação do Programa.",null,"Redução do número de evasão escolar.",null,"Ampliação do número de frequência escolar do aluno.",null,"Ampliação do número de reingressos as unidades escolares.",null,"Ampliação do número de buscas ativas realizadas.",null,"Ampliação do número de famílias inscritas no Programa.",null,"Ampliação do número de participantes da família nas formações integradas.",null,"Ampliação do número de famílias que receberam benefícios sociais.",null,"Ampliação do número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar.",null,"Ampliação do número de crianças e adolescentes inscritos em programas socioassistenciais.",null,"Ampliação do número de jovens incluídos no mercado de trabalho (jovem aprendiz).",null,"Ampliação do número de reuniões realizadas com a família x escola x comunidade.",null,"Ampliação do nível de satisfação dos participantes com relação ao programa.",null],["contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"contagem",null,"categórica",null],["Anual de 1980 até 2018",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null],["Municipios",null,"Municipios",null,"Municipios",null,"Municipios",null,"Municipios",null,"Municipios",null,"Municipios",null,"Municipios",null,"Municipios",null,"Municipios",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null],["Último ano disponível",null,"Mensal",null,"Mensal",null,"Mensal",null,"Mensal",null,"Mensal",null,"Mensal",null,"Mensal",null,"Mensal",null,"Mensal",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null,"*checar",null],["IPEA apud Datasus",null,"Registros oficiais do SIPIA.",null,"Polícia Militar ou Guarda Mun.",null,"Vara da Infância/Delegacias esp.",null,"Polícia Militar ou Guarda Mun.",null,"Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.",null,"Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.",null,"Dados oficiais do Programa sobre atividades de monitoramento e avaliação.",null,"INEP . Dados oficiais sobre número de crianças matriculadas nas escolas e índices de evasão escolar que aderiram ao Programa selecionados do INEP.",null,"Lista de frequência escolar das crianças e adolescentes do Sistema da Escola.",null,"Dados oficiais do disque 100",null,"Dados oficiais do Programa sobre Buscas Ativas realizadas.",null,"CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico",null,"Lista de frequência de participação nas formações.",null,"CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico",null,"Lista de frequência de participação nas formações.",null,"Lista de frequência de participação em programas socioassistenciais.",null,"Novo CAGED/Min.Trab.Emprego",null,"Pesquisa de satisfação dos participantes com relação ao programa.",null,"Pesquisa de satisfação dos participantes com relação ao programa.",null],["Dado público",null,"Dado público",null,"*Checar",null,"Dado público",null,"*Checar",null,"*Nome da profissional",null,"*Nome da profissional",null,"*Nome da profissional",null,"Dado Público",null,"*Nome da profissional",null,"Dado Público",null,"Dado Público",null,"Dado Públlico",null,"*Nome da profissional",null,"Dado Público",null,"*Nome da profissional",null,"*Nome da profissional",null,"Dado público",null,"*Nome da profissional",null,"*Nome da profissional",null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Nome da Variável<\/th>\n      <th>Objetivo<\/th>\n      <th>Meta<\/th>\n      <th>Tipo<\/th>\n      <th>Disponibilidade<\/th>\n      <th>Espacialidade<\/th>\n      <th>Periodicidade de atualização<\/th>\n      <th>Fonte<\/th>\n      <th>Ponto de contato<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"autoWidth":true,"order":[],"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}],"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<hr />
+</div>
+<div id="relatório-de-mapeamento-região-centro-oeste" class="section level3">
+<h3>Relatório de Mapeamento Região Centro-Oeste</h3>
+<pre class="r"><code>url &lt;- &quot;https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados%20Centro%20Oeste.xlsx&quot;
+
+dicionario_centro_oeste &lt;- tempfile()
+
+download.file(url, dicionario_centro_oeste, mode=&quot;wb&quot;)
+
+dicionario_centro_oeste &lt;- read_excel(path = dicionario_centro_oeste, skip = 1, sheet = 2)
+
+datatable(dicionario_centro_oeste, caption = &#39;Plano de Coleta e Dicionário de Dados disposto no relatório da região Centro Oeste&#39;, filter = &#39;top&#39;, options = list(pageLength = 5, autoWidth = TRUE))</code></pre>
+<div id="htmlwidget-8a617349df71b7529c65" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8a617349df71b7529c65">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Plano de Coleta e Dicionário de Dados disposto no relatório da região Centro Oeste<\/caption>","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44"],["C.V.L.I. - Crimes Violentos Letais Intencionais","C.C.P. - Crimes contra o Patrimônio","Outros Crimes","Número de notificações de violência interpessoal contra criança","Óbitos de crianças por faixa etária causados por violência interpessoal","Casos confirmados de violência física contra crianças","Casos confirmados de violência psicomoral contra crianças","Casos confirmados de tortura contra crianças","Casos confirmados de violência autoprovocada em crianças e adolescentes","Adolescentes em medida socioeducativa","Número de matrículas na rede pública distrital","Indicadores da educação","Defasagem Idade-Conclusão no Ensino","Taxas de rendimento por turno e ano","Número de escolas públicas","Programas da Secretaria de Educação","Potenciais escolas indicadas para a aplicação do projeto","Características do pessoal e corpo discente das escolas","Objetivos e metas da gestão das escolas selecionadas","Programas da esfera de proteção primária, secundária e terciária desenvolvidos pelas escolas","Programas apresentados em suas respectivas esferas de proteção","Questionário","Atores-chave","Endereços de e-mails das escolas","Número de homicídios de 15 a 29 anos","Número de casos de violência registrados","Número de boletins de ocorrência policial crianças e adolesc.","Número de ocorrências de violência intraescolar","Quant. Rondas Policiais entorno das escolas","Número de instituições públicas integrantes da rede de proteção","Lista de frequência de participação nas formações.","Número de participantes nas formações integradas","Evasão escolar (nro. Matrículas x índices de evasão)","Número de frequência escolar","Número de reingressos nas escolas","Número de buscas ativas realizadas","Número de famílias inscritas no Programa","Número de participantes da família nas formações integradas.","Número de famílias que receberam benefícios sociais.","Número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar","Número de crianças e adolescentes inscritos em programas socioassistenciais.","Número de jovens incluídos no mercado de trabalho (jovem aprendiz).","Número de reuniões realizadas com a família x escola x comunidade.","Nível de satisfação dos participantes com relação ao programa."],["Reduzir","Reduzir","Reduzir","Reduzir","Reduzir","Reduzir","Reduzir","Reduzir","Reduzir","Reduzir","Promover",null,null,null,null,null,null,null,null,null,null,null,null,null,"Promover","Reduzir","Reduzir","Reduzir","Ampliar","Integrar","Integrar","Integrar","Prevenir","Prevenir","Prevenir","Prevenir","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer"],["Diminuição dos números de Homicídio, latrocínio, Lesão Corporal Seg. de Morte","Roubo a Transeunte, Roubo de Veículo, Roubo em Transporte Coletivo, Roubo em Comércio **, Roubo em Residência, Furto em Veículo \r\n","Tentativa de Homicídio, Tentativa de Latrocínio, Estupro, Furto a Transeunte\r\n\r\n","Ocorrências para criança com menos de 1 ano, entre 1 e 4 anos,  entre 5 e 9 anos","Ocorrências para crianças com menos de 1 ano, entre 1 e 4 anos,  entre 5 e 9 anos, 10 a 14, 15 a 19.","Ocorrências para crianças com feixa de 0 a 9 anos","Ocorrências","Ocorrências","Ocorrências","Ocorrências","Distribuição","Anafalbetismo, abandono dos estudos, reprovação, Estudantes no Ensino Fundamental com defasagem de idade em relação à série correta, Estudantes matriculados na Educação Integral na rede pública de ensino","Defasagem Idade-Conclusão no Ensino fundamental, médio na rede pública distrital","Taxas de rendimento escolar por turno e ano","Número de escolas públicas","Qualitativo dos programas","Qualitativo das escolas","Qualitativo","Qualitativo","Qualitativo","Qualitativo","Qualitativo","Qualitativo, nomes, instituição, esferas de atuação","Qualitativo","Diminuição do número de mortes violentas infantojuvenil no território.","Redução do número de casos de negligência/violência com crianças e adolescentes registrados nos locais da rede de proteção.","Redução do número de boletins de ocorrência com crianças e adolescentes.","Redução do número de ocorrências de violência intraescolar registradas.","Ampliação do número de rondas policiais no entorno da escola.","Ampliação do número de instituições públicas integrantes da rede de proteção do Programa","Ampliação do número de instituições públicas integrantes da rede de proteção do Programa","Ampliação do número de integrantes da sociedade civil participando em atividades de monitoramento e avaliação do Programa.","Redução do número de evasão escolar.","Ampliação do número de frequência escolar do aluno.","Ampliação do número de reingressos as unidades escolares.","Ampliação do número de buscas ativas realizadas.","Ampliação do número de famílias inscritas no Programa.","Ampliação do número de participantes da família nas formações integradas.","Ampliação do número de famílias que receberam benefícios sociais.","Ampliação do número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar.","Ampliação do número de crianças e adolescentes inscritos em programas socioassistenciais.","Ampliação do número de jovens incluídos no mercado de trabalho (jovem aprendiz).","Ampliação do número de reuniões realizadas com a família x escola x comunidade.","Ampliação do nível de satisfação dos participantes com relação ao programa."],["contagem","contagem","contagem","contagem e %","contagem e %","contagem","contagem","contagem","contagem","contagem","contagem","Taxa","contagem","taxas","contagem","descritivo","descritivo","descritivo","descritivo","descritivo","descritivo","descritivo","descritivo","descritivo","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","categórica"],["*verificar","*verificar","*verificar","*verificar","*verificar","*verificar","2009 a 2016","2009 a 2016","2009 a 2016","ultimo disp. 2021","ultimo disp. 2021","ultimo disp. 2021","ultimo disp. 2019","ultimo disp. 2019","último disp. 2021","último disp. 2021","último disp. 2021","último disp. 2021","último disp. 2021","último disp. 2021","último disp. 2021","*checar","*checar","NA","Anual de 1980 até 2018","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["Distrito Federal e Ceilândia","Distrito Federal e Ceilândia","Distrito Federal e Ceilândia","Distrito Federal e Ceilândia","Distrito Federal e Ceilândia","Região de Saúde","Região de Saúde","Região  de Saúde","Ceilândia e DF","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Ceilândia","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","*verificar","*verificar","NA","Último ano disponível","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["Secretaria de Estado e Seg. Pública","Secretaria de Estado e Seg. Pública","Secretaria de Estado e Seg. Pública","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","Secretaria de Estado e Saúde","primária","primária","primária","IPEA apud Datasus","Registros oficiais do SIPIA.","Polícia Militar ou Guarda Mun.","Vara da Infância/Delegacias esp.","Polícia Militar ou Guarda Mun.","Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.","Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.","Dados oficiais do Programa sobre atividades de monitoramento e avaliação.","INEP . Dados oficiais sobre número de crianças matriculadas nas escolas e índices de evasão escolar que aderiram ao Programa selecionados do INEP.","Lista de frequência escolar das crianças e adolescentes do Sistema da Escola.","Dados oficiais do disque 100","Dados oficiais do Programa sobre Buscas Ativas realizadas.","CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico","Lista de frequência de participação nas formações.","CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico","Lista de frequência de participação nas formações.","Lista de frequência de participação em programas socioassistenciais.","Novo CAGED/Min.Trab.Emprego","Pesquisa de satisfação dos participantes com relação ao programa.","Pesquisa de satisfação dos participantes com relação ao programa."],["*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","*Checar","primária","primária","primária","Dado público","Dado público","*Checar","Dado público","*Checar","*Nome da profissional","*Nome da profissional","*Nome da profissional","Dado Público","*Nome da profissional","Dado Público","Dado Público","Dado Públlico","*Nome da profissional","Dado Público","*Nome da profissional","*Nome da profissional","Dado público","*Nome da profissional","*Nome da profissional"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Nome da Variável<\/th>\n      <th>Objetivo<\/th>\n      <th>Meta<\/th>\n      <th>Tipo<\/th>\n      <th>Disponibilidade<\/th>\n      <th>Espacialidade<\/th>\n      <th>Periodicidade de atualização<\/th>\n      <th>Fonte<\/th>\n      <th>Ponto de contato<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"autoWidth":true,"order":[],"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}],"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<p>Conforme os pesquisadores apontaram no documento pág. 18:</p>
+<p >
+<p style="font-family: times, serif; font-size:11pt; font-style:italic"; class="quote">
+
+Como apontado pelos atores envolvidos no Seminário, a Administração Pública do DF não dispõe de meios informatizados para aferição de alguns dados propostos pelo Eixo 1, como metas e meios de monitoramento, conforme elencados no quadro acima. Destaca-se que no âmbito do Distrito Federal existem dados sigilosos que não são passíveis de publicação e acesso externo por terceiros, sendo possível apenas o monitoramento de dados públicos.
+
+
+</p>
+<hr />
+</div>
+<div id="relatório-de-mapeamento-região-sul-paraná" class="section level3">
+<h3>Relatório de Mapeamento Região Sul (Paraná)</h3>
+<pre class="r"><code>url &lt;- &quot;https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados%20Sul.xlsx&quot;
+
+path &lt;- tempfile()
+
+download.file(url, path, mode = &quot;wb&quot;)
+
+dicionario_sul &lt;- read_excel(path = path, skip = 1, sheet = 2)
+
+datatable(dicionario_sul, caption = &#39;Plano de Coleta e Dicionário de Dados disposto no relatório da região Sul (PR)&#39;, filter = &#39;top&#39;, options = list(pageLength = 5, autoWidth = TRUE))</code></pre>
+<div id="htmlwidget-5451ad02ef556d945256" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5451ad02ef556d945256">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Plano de Coleta e Dicionário de Dados disposto no relatório da região Sul (PR)<\/caption>","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37"],["Taxa de homicídios dolosos por 100 mil habitantes","Estimativa populacional","Taxa de Ocorrências de Tráfico de Drogas por 100 mil habitantes -","Crimes contra a dignidade sexual","Violência doméstica","Domicílios particulares com rendimento médio per capita de até 1/2 salário mínimo por regional","Proporção de nascidos vivos de mães com idade inferior a 20 anos","Número de crianças e adolescentes vítimas de crimes em geral","Crianças e adolescentes vítimas de violências","Quantitativo de crianças e adolescentes vítimas de mortes violentas dolosas","Caracterização da história dos bairros","Índice IDEB das escolas escolhidas","Rendimento escolar das escolas escolhidas pelo programa","Programas das Organizações da Sociedade Civil","Programas Públicos Existentes","Mapeamento dos Atores Chaves","Distorção idade/série das escolas escolhidas","Número de homicídios de 15 a 29 anos","Número de casos de violência registrados","Número de boletins de ocorrência policial crianças e adolesc.","Número de ocorrências de violência intraescolar","Quant. Rondas Policiais entorno das escolas","Número de instituições públicas integrantes da rede de proteção","Lista de frequência de participação nas formações.","Número de participantes nas formações integradas","Evasão escolar (nro. Matrículas x índices de evasão)","Número de frequência escolar","Número de reingressos nas escolas","Número de buscas ativas realizadas","Número de famílias inscritas no Programa","Número de participantes da família nas formações integradas.","Número de famílias que receberam benefícios sociais.","Número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar","Número de crianças e adolescentes inscritos em programas socioassistenciais.","Número de jovens incluídos no mercado de trabalho (jovem aprendiz).","Número de reuniões realizadas com a família x escola x comunidade.","Nível de satisfação dos participantes com relação ao programa."],["Reduzir",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"Promover","Reduzir","Reduzir","Reduzir","Ampliar","Integrar","Integrar","Integrar","Prevenir","Prevenir","Prevenir","Prevenir","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer"],["Diminuição dos números de Homicídio, latrocínio, Lesão Corporal Seg. de Morte",null,null,null,null,null,null,"Número de crianças e adolescentes vítimas de crimes em geral, incluindo o uso e tráfico de drogas, em Curitiba no período de 01 de janeiro de 2019 até 30 de junho de 2021",null,null,null,null,null,"(Potencialidades)",null,null,null,"Diminuição do número de mortes violentas infantojuvenil no território.","Redução do número de casos de negligência/violência com crianças e adolescentes registrados nos locais da rede de proteção.","Redução do número de boletins de ocorrência com crianças e adolescentes.","Redução do número de ocorrências de violência intraescolar registradas.","Ampliação do número de rondas policiais no entorno da escola.","Ampliação do número de instituições públicas integrantes da rede de proteção do Programa","Ampliação do número de instituições públicas integrantes da rede de proteção do Programa","Ampliação do número de integrantes da sociedade civil participando em atividades de monitoramento e avaliação do Programa.","Redução do número de evasão escolar.","Ampliação do número de frequência escolar do aluno.","Ampliação do número de reingressos as unidades escolares.","Ampliação do número de buscas ativas realizadas.","Ampliação do número de famílias inscritas no Programa.","Ampliação do número de participantes da família nas formações integradas.","Ampliação do número de famílias que receberam benefícios sociais.","Ampliação do número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar.","Ampliação do número de crianças e adolescentes inscritos em programas socioassistenciais.","Ampliação do número de jovens incluídos no mercado de trabalho (jovem aprendiz).","Ampliação do número de reuniões realizadas com a família x escola x comunidade.","Ampliação do nível de satisfação dos participantes com relação ao programa."],["contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","Índice","Índice","descritivo","descritivo",null,"taxa","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","categórica"],["último disp. 2018","último disp. 2018","último disp. 2018","último disp. 2018","último disp. 2018","ultimo disp. 2010","ultimo disp. 2021","último disp. 2021","2019-2021","Jan 2019 a Jun 2021.","descritivo","2005-2019","2010-2019",null,null,null,"2020","Anual de 1980 até 2018","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["Regionais (bairros)","Regionais (bairros)","Regionais (bairros)","Regionais (bairros)","Regionais (bairros)","Regionais (bairros)","Regionais (bairros)","Regionais (bairros)","Bairros","Bairros","Bairros","Bairros","Bairros",null,null,null,"Bairros","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual","anual",null,null,null,"anual","Último ano disponível","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["Secretaria de Estado e Seg. Pública/IPUCC","IPUCC/IBGE","IPUCC/IBGE","IPUCC/IBGE","IPUCC/IBGE","IPPUC","IPPUC","IPPUC","Relatório de Análise Criminal","Relatório de Análise Criminal",null,"Núcleo Regional de Educação","Núcleo Regional de Educação",null,null,null,"Núcleo Regional de Educação","IPEA apud Datasus","Registros oficiais do SIPIA.","Polícia Militar ou Guarda Mun.","Vara da Infância/Delegacias esp.","Polícia Militar ou Guarda Mun.","Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.","Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.","Dados oficiais do Programa sobre atividades de monitoramento e avaliação.","INEP . Dados oficiais sobre número de crianças matriculadas nas escolas e índices de evasão escolar que aderiram ao Programa selecionados do INEP.","Lista de frequência escolar das crianças e adolescentes do Sistema da Escola.","Dados oficiais do disque 100","Dados oficiais do Programa sobre Buscas Ativas realizadas.","CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico","Lista de frequência de participação nas formações.","CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico","Lista de frequência de participação nas formações.","Lista de frequência de participação em programas socioassistenciais.","Novo CAGED/Min.Trab.Emprego","Pesquisa de satisfação dos participantes com relação ao programa.","Pesquisa de satisfação dos participantes com relação ao programa."],["*Checar","dado secundário","dado secundário","dado secundário","dado secundário","dado secundário","dado secundário","dado secundário","dado secundário","dado secundário",null,"dado secundário","dado secundário",null,null,"dado primário","dado secundário","Dado público","Dado público","*Checar","Dado público","*Checar","*Nome da profissional","*Nome da profissional","*Nome da profissional","Dado Público","*Nome da profissional","Dado Público","Dado Público","Dado Públlico","*Nome da profissional","Dado Público","*Nome da profissional","*Nome da profissional","Dado público","*Nome da profissional","*Nome da profissional"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Nome da Variável<\/th>\n      <th>Objetivo<\/th>\n      <th>Meta<\/th>\n      <th>Tipo<\/th>\n      <th>Disponibilidade<\/th>\n      <th>Espacialidade<\/th>\n      <th>Periodicidade de atualização<\/th>\n      <th>Fonte<\/th>\n      <th>Ponto de contato<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"autoWidth":true,"order":[],"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}],"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<hr />
+</div>
+<div id="relatório-de-mapeamento-região-sul-rs" class="section level3">
+<h3>Relatório de Mapeamento Região Sul (RS)</h3>
+<pre class="r"><code>url &lt;- &quot;https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados%20Sul%20(RS).xlsx&quot;
+
+path &lt;- tempfile()
+
+download.file(url, path, mode = &quot;wb&quot;)
+
+dicionario_sul_rs &lt;- read_excel(path = path, skip = 1, sheet = 2)
+
+datatable(dicionario_sul_rs, caption = &#39;Plano de Coleta e Dicionário de Dados disposto no relatório da região Sul (RS)&#39;, filter = &#39;top&#39;, options = list(pageLength = 5, autoWidth = TRUE))</code></pre>
+<div id="htmlwidget-44f3533d91bbeed70e88" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-44f3533d91bbeed70e88">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Plano de Coleta e Dicionário de Dados disposto no relatório da região Sul (RS)<\/caption>","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41"],["Plano Municipal de Educação","Plano Estadual de Educação","Evasão escolar","Número de escolas de ensino fundamental","Número de instituições de ensino superior","Desafios na área da educação","CRAS","Programas desenvolvidos e gerenciados pela SMSPPS,","Unidades Básicas de Saúde (UBSs),","Equipes de Saúde da Família (ESF),","índices de criminalidade","Famílias em situação de pobreza e extrema pobreza nos bairros mais populosos da região Sul","Ddados relativos as informações sobre a capacidade de ler e escrever das pessoas cadastradas no CRAS Sul","Dados sobre violência envolvendo crianças e adolescentes na Região Sul","Diagnóstico socioterritorial da Região Norte","Atores Estratégicos","Programas existentes por esfera de proteção","Visitas realizadas nas instituições","Outras formas de contato com as instituições","Atores-chave do Poder Público, Inst. Privadas, OSCs, Seg. Públ.","Relação dos atores estratégicos/Público, Privado (primário, secundário e terciário): parcerias sinalizadas ao Programa Vem Viver","Número de homicídios de 15 a 29 anos","Número de casos de violência registrados","Número de boletins de ocorrência policial crianças e adolesc.","Número de ocorrências de violência intraescolar","Quant. Rondas Policiais entorno das escolas","Número de instituições públicas integrantes da rede de proteção","Lista de frequência de participação nas formações.","Número de participantes nas formações integradas","Evasão escolar (nro. Matrículas x índices de evasão)","Número de frequência escolar","Número de reingressos nas escolas","Número de buscas ativas realizadas","Número de famílias inscritas no Programa","Número de participantes da família nas formações integradas.","Número de famílias que receberam benefícios sociais.","Número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar","Número de crianças e adolescentes inscritos em programas socioassistenciais.","Número de jovens incluídos no mercado de trabalho (jovem aprendiz).","Número de reuniões realizadas com a família x escola x comunidade.","Nível de satisfação dos participantes com relação ao programa."],[null,null,"Reduzir",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"Promover","Reduzir","Reduzir","Reduzir","Ampliar","Integrar","Integrar","Integrar","Prevenir","Prevenir","Prevenir","Prevenir","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer"],["específicas de acordo com o Plano","específicas de acordo com o Plano","percentual de evasão no ensino médio e fundamental (nfrequência por idade do aluno, por motivo, turno, Rede Escolar, on line por ano escolar, Ficai por Conselho Tutelar)","total de rede municipal/estadual de ensino, EJAs, particulares e públicas","Ifs, faculdades, universidades.","*elencar os principais desafios","*caracterização, planos, projetos, desafios e quantitdade de unidades","Descritivo dos programas, projetos e desafios","*caracterização, planos, projetos, desafios e quantitdade de unidades","*caracterização, planos, projetos, desafios e quantitdade de unidades","tipificação do cime",null,"Pessoas declararam saber ler e escrever; pessoas que não sabem ler e escrever, levados em conta os indivíduos em idade escolar ou que estão acima da faixa etária deste critério.","tipo de violência sofrida/praticada","caracterização do território","caracterização e contatos dos responsáveis (atores estratégicos respectivamente dos setores público e privado)","Esferas primárias, secundárias e terciárias, descritivo dos programas, caracterização, desafios e objetivos (inst. Públicas e privadas)","apresentar os resultados dos contatos estabelecidos com as instituições públicas e privadas, tendo em vista apresentar o programa Vem Viver, identificar suas capacidades e desafios e fundamentalmente assegurar a parceria e contribuição para a testagem da metodologia de proteção à vida e obter dados e informações importantes para a definição dos atores-chave.","quadro de contatos e alternativas","quadro descritivo","quadro descritivo, desafios e capacidades","Diminuição do número de mortes violentas infantojuvenil no território.","Redução do número de casos de negligência/violência com crianças e adolescentes registrados nos locais da rede de proteção.","Redução do número de boletins de ocorrência com crianças e adolescentes.","Redução do número de ocorrências de violência intraescolar registradas.","Ampliação do número de rondas policiais no entorno da escola.","Ampliação do número de instituições públicas integrantes da rede de proteção do Programa","Ampliação do número de instituições públicas integrantes da rede de proteção do Programa","Ampliação do número de integrantes da sociedade civil participando em atividades de monitoramento e avaliação do Programa.","Redução do número de evasão escolar.","Ampliação do número de frequência escolar do aluno.","Ampliação do número de reingressos as unidades escolares.","Ampliação do número de buscas ativas realizadas.","Ampliação do número de famílias inscritas no Programa.","Ampliação do número de participantes da família nas formações integradas.","Ampliação do número de famílias que receberam benefícios sociais.","Ampliação do número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar.","Ampliação do número de crianças e adolescentes inscritos em programas socioassistenciais.","Ampliação do número de jovens incluídos no mercado de trabalho (jovem aprendiz).","Ampliação do número de reuniões realizadas com a família x escola x comunidade.","Ampliação do nível de satisfação dos participantes com relação ao programa."],["qualitativo","qualitativo","taxa","taxas e contagens","taxas e contagens","qualitativo","quali-contagem","qualitativo","quali-contagem","quali-contagem","qualitativo e taxas","contagem e percentuais","contagem e percentuais","contagem","qualitativo","qualitativo","qualtitativo","qualitativo","qualitativo","qualitativo","qualitativo","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","categórica"],["último disp. 2021 a 2024","último disp. 2021 a 2024","último disp. 2020","anual, último disp. 2020","anual, último disp. 2020","de acordo com periodicidade das reuniões com Prefeitura","anual","*checar","*checar","*checar","*checar","2018 - 2021","2018 - 2021","2019-2021","NA","periódico","periódico","periódico","periodico","periódico","periódico","Anual de 1980 até 2018","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["mun. (Caxias do Sul RS)","mun. (Caxias do Sul RS)","mun. (Caxias do Sul RS)","mun. (Caxias do Sul e RS)","mun. (Caxias do Sul e RS)","mun. (Caxias do Sul RS)","mun. (Caxias do Sul RS)","mun. (Caxias do Sul RS)","mun. (Caxias do Sul RS)","mun. (Caxias do Sul RS)","mun. (Caxias do Sul RS)","mun. (Caxias do Sul RS)","mun. (Caxias do Sul RS)","mun. (Caxias do Sul RS)","Região Norte de Caxias do Sul","Região Norte de Caxias do Sul","Região Norte de Caxias do Sul","Região Norte de Caxias do Sul","Caxias do Sul","Caxias do Sul","Caxias do Sul","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["*checar","*checar","anual","anual","anual","*checar","*checar","*checar","*checar","*checar","*checar","anual","anual","anual","NA","periódico","periódico","periódico","periódico","periódico","periódico","Último ano disponível","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["http://www.al.rs.gov.br/filerepository/repLegis/arquivos/LEI%2014.705.pdf","http://www.al.rs.gov.br/filerepository/repLegis/arquivos/LEI%2014.705.pdf","Ministério Público através do sistema Ficai e INEP","IBGE","IBGE","Prefeitura de Caxias do Sul com os titulares das Secretarias de Educação, Segurança e Assistência Social, e componentes da equipe do Mão Amiga.","https://fas.caxias.rs.gov.br/index.php/estrutura-da-fas/%20diretoria-de-protecao-basica/cras/","https://caxias.rs.gov.br/servicos/seguranca-pu%20blica/diretoria-de-protecao-social/caxias-da-paz","https://caxias.rs.gov.br/servicos/saude/unidades-basicas-de-saude","https://caxias.rs.gov.br/servicos/saude/estrategia-de-saude-da-familia","Secretaria de Segurança Pública – SMSPPS,","Plano de Assistência Social do Município","Plano de Assistência Social do Município","Secretaria Municipal de Segurança Pública","Plano Municipal de Assistência Social (2018-2021)","As autoras","PIP 02","Os autores","Os autores","Os autores","Os autores","IPEA apud Datasus","Registros oficiais do SIPIA.","Polícia Militar ou Guarda Mun.","Vara da Infância/Delegacias esp.","Polícia Militar ou Guarda Mun.","Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.","Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.","Dados oficiais do Programa sobre atividades de monitoramento e avaliação.","INEP . Dados oficiais sobre número de crianças matriculadas nas escolas e índices de evasão escolar que aderiram ao Programa selecionados do INEP.","Lista de frequência escolar das crianças e adolescentes do Sistema da Escola.","Dados oficiais do disque 100","Dados oficiais do Programa sobre Buscas Ativas realizadas.","CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico","Lista de frequência de participação nas formações.","CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico","Lista de frequência de participação nas formações.","Lista de frequência de participação em programas socioassistenciais.","Novo CAGED/Min.Trab.Emprego","Pesquisa de satisfação dos participantes com relação ao programa.","Pesquisa de satisfação dos participantes com relação ao programa."],["dado público","dado público","dado público","dado público","dado público","dado primário","dado público","dado público","dado público","dado público","dado público","dado público","dado público","dado público","dado público","dado primário","dado primário","dado primário","dado primário","dado primário","dado primário","Dado público","Dado público","*Checar","Dado público","*Checar","*Nome da profissional","*Nome da profissional","*Nome da profissional","Dado Público","*Nome da profissional","Dado Público","Dado Público","Dado Públlico","*Nome da profissional","Dado Público","*Nome da profissional","*Nome da profissional","Dado público","*Nome da profissional","*Nome da profissional"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Nome da Variável<\/th>\n      <th>Objetivo<\/th>\n      <th>Meta<\/th>\n      <th>Tipo<\/th>\n      <th>Disponibilidade<\/th>\n      <th>Espacialidade<\/th>\n      <th>Periodicidade de atualização<\/th>\n      <th>Fonte<\/th>\n      <th>Ponto de contato<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"autoWidth":true,"order":[],"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}],"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<hr />
+</div>
+<div id="relatório-de-mapeamento-região-nordeste" class="section level3">
+<h3>Relatório de Mapeamento Região Nordeste</h3>
+<pre class="r"><code>url &lt;- &quot;https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados%20Nordeste.xlsx&quot;
+
+path &lt;- tempfile()
+
+download.file(url, path, mode = &quot;wb&quot;)
+
+dicionario_nordeste &lt;- read_excel(path = path, skip = 1, sheet = 2)
+
+datatable(dicionario_nordeste, caption = &#39;Plano de Coleta e Dicionário de Dados disposto no relatório da região Nordeste&#39;, filter = &#39;top&#39;, options = list(pageLength = 5, autoWidth = TRUE))</code></pre>
+<div id="htmlwidget-c226c0160b674c00d916" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c226c0160b674c00d916">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Plano de Coleta e Dicionário de Dados disposto no relatório da região Nordeste<\/caption>","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52"],["IDH","Histórico do Bairro","Dados sócioeconômicos","Eventos culturais","Planos e Projetos previstos","Letalidade infanto-juvenil (mortes por causas externas e homicidios)","Feminicídios; Homicídios Dolosos; Homicídios Dolosos com Indício de Excludente de Ilicitude; Homicídio Doloso no Trânsito; Homicídio Ocorrido em Presídio; Lesão Corporal Seguido de Morte; Roubo Seguido de Morte (Latrocínio).","Homicidios registrados por localidade","IDEB","Número de escolas","Infraestrutura escolar","Número de matrículas por sexo, raça/cor","Perfil escolar","Defasagem de crianças idade-série","Expectativa de anos de estudo","Analfabetismo na população adulta","Quantitativo de Escolas por Prefeitura-Bairro","Mapeamento de Atores - Projeto Humana -SSA 16.10","Taxa de Letalidade por Raça/Cor","Coeficientes de mortalidade por homicídios","Taxa de Letalidade por Faixa Etária de 05 a 19 anos","Bairros mais violentos de Salvador","Acumulado Homicídios POR AISP/SSP-BA","Indicadores de Proficiência Português e Matemática","Expectativa de anos de estudo","Taxa de Rendimento","Taxa de abandono escolar","População","Indicadores da Saúde e Educação","Indicadores de Renda","Indicadores de Vulnerabilidade","Atores Mapeados por Esfera de Proteção","Número de homicídios de 15 a 29 anos","Número de casos de violência registrados","Número de boletins de ocorrência policial crianças e adolesc.","Número de ocorrências de violência intraescolar","Quant. Rondas Policiais entorno das escolas","Número de instituições públicas integrantes da rede de proteção","Lista de frequência de participação nas formações.","Número de participantes nas formações integradas","Evasão escolar (nro. Matrículas x índices de evasão)","Número de frequência escolar","Número de reingressos nas escolas","Número de buscas ativas realizadas","Número de famílias inscritas no Programa","Número de participantes da família nas formações integradas.","Número de famílias que receberam benefícios sociais.","Número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar","Número de crianças e adolescentes inscritos em programas socioassistenciais.","Número de jovens incluídos no mercado de trabalho (jovem aprendiz).","Número de reuniões realizadas com a família x escola x comunidade.","Nível de satisfação dos participantes com relação ao programa."],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"Promover","Reduzir","Reduzir","Reduzir","Ampliar","Integrar","Integrar","Integrar","Prevenir","Prevenir","Prevenir","Prevenir","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer"],[null,null,null,null,"Em execução e previstos",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"O Banco de Dados do Mapeamento dos Atores do Projeto apresenta informações cadastrais de todas as organizações mapeadas, constando telefone (fixo e celular), e-mail, endereço, website e redes sociais","Diminuição do número de mortes violentas infantojuvenil no território.","Redução do número de casos de negligência/violência com crianças e adolescentes registrados nos locais da rede de proteção.","Redução do número de boletins de ocorrência com crianças e adolescentes.","Redução do número de ocorrências de violência intraescolar registradas.","Ampliação do número de rondas policiais no entorno da escola.","Ampliação do número de instituições públicas integrantes da rede de proteção do Programa","Ampliação do número de instituições públicas integrantes da rede de proteção do Programa","Ampliação do número de integrantes da sociedade civil participando em atividades de monitoramento e avaliação do Programa.","Redução do número de evasão escolar.","Ampliação do número de frequência escolar do aluno.","Ampliação do número de reingressos as unidades escolares.","Ampliação do número de buscas ativas realizadas.","Ampliação do número de famílias inscritas no Programa.","Ampliação do número de participantes da família nas formações integradas.","Ampliação do número de famílias que receberam benefícios sociais.","Ampliação do número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar.","Ampliação do número de crianças e adolescentes inscritos em programas socioassistenciais.","Ampliação do número de jovens incluídos no mercado de trabalho (jovem aprendiz).","Ampliação do número de reuniões realizadas com a família x escola x comunidade.","Ampliação do nível de satisfação dos participantes com relação ao programa."],["Indicador","Qualitativo","Diversos","Qualitativo","Qualitativo","contagem","contagem",null,"Indicador (0 a 10)","contagem","qualitativo","contagem","diversos","contagem/índice","contagem/índice","contagem e %","contagem","diversos","Taxa","Coeficientes","Taxa","Taxa","contagem","indicador","indicador","taxa","taxa","contagem","Diversos","monetário (faixas) e %","%","Qualitativo","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","categórica"],["anual","NA","*verificar","*verificar","*verificar","anual","anual (2018 a mais recente)","década de 2011 a 2021","anual","anual","anual","anual","*verificar","*verificar","*verificar","*verificar","último disp. 2021","último disp. 2021","distinto por variável/fonte","*verificar","último disp. 2020","2011 em diante","2018, 2019 e 2020","último disp. 2020","último disp. 2010","último disp. 2020","último disp. 2019","último disp. 2021","último disp. 2010","último disp. 2010","último disp. 2010","*verificar","Anual de 1980 até 2018","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["municipio","Bairros de Salvador","Bairros de Salvador","Bairros de Salvador","Bairros de Salvador","Bairros","*verificar","Salvador","Salvador","Salvador","Salvador","Salvador","Salvador","*verificar","*verificar","*verificar","*verificar","Salvador e Bairros","Salvador","Salvador","Salvador","Bairros de Salvador","Bairros de Salvador","Salvador","Salvador","Salvador","Salvador","Salvador e Bairros","Salvador e Bairros","Salvador e Bairros","Salvador e Bairros","Salvador e Bairros","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["ano -1","NA","*verificar","*verificar","*verificar","ano-1","ano-1",null,"ano-1","ano-1","ano-1","ano-1","*verificar","*verificar","*verificar","*verificar","*verificar","*verificar","distinto por variável","*verificar","ano-1","último disp. 2021","ano-1","ano-1","ano-1","ano-1","último disp. 2019","*verificar","*verificar","*verificar","*verificar","*verificar","Último ano disponível","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["Atlas do Desenvolvimento Humano","Observatório dos Bairros de Salvador (ObservaSSA)","Observatório dos Bairros de Salvador (ObservaSSA)","Observatório dos Bairros de Salvador (ObservaSSA)","Observatório dos Bairros de Salvador (ObservaSSA)","Secretaria de Saúde da Bahia -  SESAB/SUVISA/DIVEP","Secretaria de Saúde da Bahia -  SESAB/SUVISA/DIVEP","Projeto Mil Vidas do Jornal Correio da Bahia","INEP","INEP","INEP","INEP","QEDU","Atlas do Desenvolvimento do PNUD","Atlas do Desenvolvimento do PNUD","Atlas do Desenvolvimento do PNUD","Secretaria de Educação da Prefeitura de Salvador","pesquisa primária","IBGE Cidades (2021); SESAB/SUVISA/DIVEP/Sistema de Informação sobre Mortalidade – SIM","OMS","IBGE Cidades (2021); SESAB/SUVISA/DIVEP/Sistema de Informação sobre Mortalidade – SIM","Jornal Correios - Banco de dados Projeto Mil Vidas","Secretaria de Segurança Pública da Bahia","QEDU/ Prova Brasil/ Inep (2020)","*verificar","QEDU/ Prova Brasil/ Inep (2020)","Mapa da Exclusão Escolar da UNICEF","http://prefeiturabairro.salvador.ba.gov.br","Atlas de Desenvolvimento Humano","Atlas de Desenvolvimento Humano","Atlas de Desenvolvimento Humano","Banco de Dados do Mapeamento de Atores de Salvador","IPEA apud Datasus","Registros oficiais do SIPIA.","Polícia Militar ou Guarda Mun.","Vara da Infância/Delegacias esp.","Polícia Militar ou Guarda Mun.","Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.","Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.","Dados oficiais do Programa sobre atividades de monitoramento e avaliação.","INEP . Dados oficiais sobre número de crianças matriculadas nas escolas e índices de evasão escolar que aderiram ao Programa selecionados do INEP.","Lista de frequência escolar das crianças e adolescentes do Sistema da Escola.","Dados oficiais do disque 100","Dados oficiais do Programa sobre Buscas Ativas realizadas.","CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico","Lista de frequência de participação nas formações.","CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico","Lista de frequência de participação nas formações.","Lista de frequência de participação em programas socioassistenciais.","Novo CAGED/Min.Trab.Emprego","Pesquisa de satisfação dos participantes com relação ao programa.","Pesquisa de satisfação dos participantes com relação ao programa."],["dado público","dado público","dado público","dado público","dado público","dado público","Superintendência de Prevenção à Violência","*verificar","dado público","dado público","dado público","dado público","dado público","dado público","dado público","dado público","dado público","dado primário","Dado público","Dado público","dado público","dado público","dado público","dado público","*verificar","*verificar","dado público","dado público","dado público","dado público","dado público","dado público","Dado público","Dado público","*Checar","Dado público","*Checar","*Nome da profissional","*Nome da profissional","*Nome da profissional","Dado Público","*Nome da profissional","Dado Público","Dado Público","Dado Públlico","*Nome da profissional","Dado Público","*Nome da profissional","*Nome da profissional","Dado público","*Nome da profissional","*Nome da profissional"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Nome da Variável<\/th>\n      <th>Objetivo<\/th>\n      <th>Meta<\/th>\n      <th>Tipo<\/th>\n      <th>Disponibilidade<\/th>\n      <th>Espacialidade<\/th>\n      <th>Periodicidade de atualização<\/th>\n      <th>Fonte<\/th>\n      <th>Ponto de contato<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"autoWidth":true,"order":[],"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}],"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<hr />
+</div>
+<div id="relatório-de-mapeamento-região-sudeste" class="section level3">
+<h3>Relatório de Mapeamento Região Sudeste</h3>
+<pre class="r"><code>url &lt;- &quot;https://github.com/estprjpnud/datasets/raw/main/Dicion%C3%A1rio%20de%20Dados%20Sudeste.xlsx&quot;
+
+path &lt;- tempfile()
+
+download.file(url, path, mode = &quot;wb&quot;)
+
+dicionario_sudeste &lt;- read_excel(path = path, skip = 1, sheet = 2)
+
+datatable(dicionario_sudeste, caption = &#39;Plano de Coleta e Dicionário de Dados disposto no relatório da região Sudeste&#39;, filter = &#39;top&#39;, options = list(pageLength = 5, autoWidth = TRUE))</code></pre>
+<div id="htmlwidget-ab2b950a082d9ced96fc" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ab2b950a082d9ced96fc">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","caption":"<caption>Plano de Coleta e Dicionário de Dados disposto no relatório da região Sudeste<\/caption>","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38"],["Indicadores de violência contra crianças e adolescentes","Unidade Regional de Governo, Bairros, Escolas, Área","Indicador estratégico: letalidade violenta","Indicador estratégico: roubo de rua","Indicador estratégico: roubo de veiculo","Letalidade violenta pelo ISP e Resumo","Quantitativo de escolas","Programas CRAS por URG","Programas CREAS por URG","Programas SócioAssistenciais","Permanentes na SMC","Unidades e serviços desenvolvidos pela secr. Saúde","Esferas de proteção municipal","Atores visitados/entrevistados","Instituições visitadas por URG","% violência","% evasão escolar","Dados do questionário de mapeamento de rede local","Número de homicídios de 15 a 29 anos","Número de casos de violência registrados","Número de boletins de ocorrência policial crianças e adolesc.","Número de ocorrências de violência intraescolar","Quant. Rondas Policiais entorno das escolas","Número de instituições públicas integrantes da rede de proteção","Lista de frequência de participação nas formações.","Número de participantes nas formações integradas","Evasão escolar (nro. Matrículas x índices de evasão)","Número de frequência escolar","Número de reingressos nas escolas","Número de buscas ativas realizadas","Número de famílias inscritas no Programa","Número de participantes da família nas formações integradas.","Número de famílias que receberam benefícios sociais.","Número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar","Número de crianças e adolescentes inscritos em programas socioassistenciais.","Número de jovens incluídos no mercado de trabalho (jovem aprendiz).","Número de reuniões realizadas com a família x escola x comunidade.","Nível de satisfação dos participantes com relação ao programa."],["Reduzir",null,"Reduzir","Reduzir","Reduzir","Reduzir",null,null,null,null,null,null,null,null,null,null,null,null,"Promover","Reduzir","Reduzir","Reduzir","Ampliar","Integrar","Integrar","Integrar","Prevenir","Prevenir","Prevenir","Prevenir","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer","Fortalecer"],[null,null,null,null,null,null,"Quantitativo de escolas total e segmentado",null,null,null,null,null,null,null,null,null,null,null,"Diminuição do número de mortes violentas infantojuvenil no território.","Redução do número de casos de negligência/violência com crianças e adolescentes registrados nos locais da rede de proteção.","Redução do número de boletins de ocorrência com crianças e adolescentes.","Redução do número de ocorrências de violência intraescolar registradas.","Ampliação do número de rondas policiais no entorno da escola.","Ampliação do número de instituições públicas integrantes da rede de proteção do Programa","Ampliação do número de instituições públicas integrantes da rede de proteção do Programa","Ampliação do número de integrantes da sociedade civil participando em atividades de monitoramento e avaliação do Programa.","Redução do número de evasão escolar.","Ampliação do número de frequência escolar do aluno.","Ampliação do número de reingressos as unidades escolares.","Ampliação do número de buscas ativas realizadas.","Ampliação do número de famílias inscritas no Programa.","Ampliação do número de participantes da família nas formações integradas.","Ampliação do número de famílias que receberam benefícios sociais.","Ampliação do número de alunos participantes na aplicação do Programa Vem Viver no espaço escolar.","Ampliação do número de crianças e adolescentes inscritos em programas socioassistenciais.","Ampliação do número de jovens incluídos no mercado de trabalho (jovem aprendiz).","Ampliação do número de reuniões realizadas com a família x escola x comunidade.","Ampliação do nível de satisfação dos participantes com relação ao programa."],["contagem","qualitativo","contagem e %","contagem e %","contagem e %","contagem e %","contagem","qualitativo","qualitativo","qualitativo","qualitativo","qualitativo","qualitativo","qualitativo","qualitativo","contagem e %","contagem e %","qualitativo","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","contagem","categórica"],["último disp. 2017","último disp. 2021","2014 a 2021","2014 a 2021","2014 a 2021","mensal ano a ano","último disp. 2020","último disp. 2021","último disp. 2021","último disp. 2021","último disp. 2021","último disp. 2021","último disp. 2021","último disp. 2021","último disp. 2021","último disp. 2021","último disp. 2021","*checar","Anual de 1980 até 2018","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["Mun. RJ","Bairros Nova Iguaçu","Nova Iguaçu","Nova Iguaçu","Nova Iguaçu","região do RJ","Nova Iguaçu","Nova Iguaçu","Nova Iguaçu","Nova Iguaçu","Nova Iguaçu","Nova Iguaçu","Nova Iguaçu","Nova Iguaçu","Nova Iguaçu","Bairros de Nova Iguaçu","Bairros de Nova Iguaçu","Bairros e Nova Iguaçu","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","Municipios","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["*checar","*checar","*checar","*checar","*checar","*checar","*verificar","*Verificar","*Verificar","*Verificar","*Verificar","*Verificar","*Verificar","*Verificar","*Verificar","*Verificar","*Verificar","*Verificar","Último ano disponível","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","Mensal","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar","*checar"],["Dossiê Criança e Adolescente","Prefeitura de Nova Iguaçu e autores","ISP","ISP","ISP","ISP","Censo escolar","Site Prefeitura da Cidade de Nova Iguaçu","Site Prefeitura da Cidade de Nova Iguaçu","Site Prefeitura da Cidade de Nova Iguaçu","Site Prefeitura da Cidade de Nova Iguaçu","Site Prefeitura da Cidade de Nova Iguaçu","Autoria","Autoria","Autoria","Autoria","Autoria","Autoria","IPEA apud Datasus","Registros oficiais do SIPIA.","Polícia Militar ou Guarda Mun.","Vara da Infância/Delegacias esp.","Polícia Militar ou Guarda Mun.","Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.","Listagem de instituições públicas e privadas integrantes da rede de proteção do \r\nPrograma.","Dados oficiais do Programa sobre atividades de monitoramento e avaliação.","INEP . Dados oficiais sobre número de crianças matriculadas nas escolas e índices de evasão escolar que aderiram ao Programa selecionados do INEP.","Lista de frequência escolar das crianças e adolescentes do Sistema da Escola.","Dados oficiais do disque 100","Dados oficiais do Programa sobre Buscas Ativas realizadas.","CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico","Lista de frequência de participação nas formações.","CadÚnico. Dados oficiais sobre os benefícios sociais recebidos pelas famílias que integram a localidade de aplicação do Programa obtidos no CadÚnico","Lista de frequência de participação nas formações.","Lista de frequência de participação em programas socioassistenciais.","Novo CAGED/Min.Trab.Emprego","Pesquisa de satisfação dos participantes com relação ao programa.","Pesquisa de satisfação dos participantes com relação ao programa."],[null,"*verificar","*Verificar","*Verificar","*Verificar","*Verificar","dado público","dado público","dado público","dado público","dado público","dado público","dado primário","dado primário","dado primário","dado primário","dado primário","dados primários","Dado público","Dado público","*Checar","Dado público","*Checar","*Nome da profissional","*Nome da profissional","*Nome da profissional","Dado Público","*Nome da profissional","Dado Público","Dado Público","Dado Públlico","*Nome da profissional","Dado Público","*Nome da profissional","*Nome da profissional","Dado público","*Nome da profissional","*Nome da profissional"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Nome da Variável<\/th>\n      <th>Objetivo<\/th>\n      <th>Meta<\/th>\n      <th>Tipo<\/th>\n      <th>Disponibilidade<\/th>\n      <th>Espacialidade<\/th>\n      <th>Periodicidade de atualização<\/th>\n      <th>Fonte<\/th>\n      <th>Ponto de contato<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"autoWidth":true,"order":[],"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}],"orderCellsTop":true,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<hr />
+<hr />
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<hr />
+</div>
+</div>
+</div>
+<div id="referências" class="section level1">
+<h1>Referências</h1>
+<p>Atuação Global, <strong>Manual Metodológico</strong>, acesso em nov. 2021</p>
+<p>______________, <strong>Relatório de Mapeamento Região Sul (Paraná): “Fortalecimento da garantia do direito à vida e da redução da violência contra crianças e adolescentes no Brasil”</strong>, acesso em nov. 2021</p>
+<p>______________, <strong>Relatório de Mapeamento Região Sul (Rio Grande do Sul): “Fortalecimento da garantia do direito à vida e da redução da violência contra crianças e adolescentes no Brasil”</strong>, acesso em nov. 2021</p>
+<p>______________, <strong>Relatório de Mapeamento Região Centro-Oeste: “Fortalecimento da garantia do direito à vida e da redução da violência contra crianças e adolescentes no Brasil”</strong>, acesso em nov. 2021</p>
+<p>______________, <strong>Relatório de Mapeamento Região Nordeste: “Fortalecimento da garantia do direito à vida e da redução da violência contra crianças e adolescentes no Brasil”</strong>, acesso em nov. 2021</p>
+<p>______________, <strong>Relatório de Mapeamento Região Sudeste: “Fortalecimento da garantia do direito à vida e da redução da violência contra crianças e adolescentes no Brasil”</strong>, acesso em nov. 2021</p>
+<hr />
+<p> </p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
